@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Boggle</title>
+  </head>
+  <body>
+    <div class="navigation-bar">
+      <nav class="navbar">
+        <div class="navbar-links">
+          <a href="#">Juego</a>
+          <a href="#">Instrucciones</a>
+          <a href="#">Contacto</a>
+        </div>
+        <div class="navbar-welcome">
+          <p>Bienvenido, <span id="player-name">Nombre Jugador</span></p>
+        </div>
+      </nav>
+    </div>
+    <div class="header-container">
+      <div class="title-container">
+        <h1>Boggle</h1>
+        <p>Encuentra tantas palabras como puedas en el tablero</p>
+      </div>
+      <div class="timer-container">
+        <h2>Tiempo</h2>
+        <p id="boggle-timer">0:00</p>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div class="left-container">
+        <div class="boggle-container">
+          <table id="boggle-board"></table>
+        </div>
+        <div class="boggle-add-word-container">
+          <input type="text" id="boggle-add-word" />
+          <button id="boggle-add-word-button">Validar</button>
+        </div>
+      </div>
+      <div class="right-container">
+        <div class="boggle-words-container">
+          <h2>Palabras</h2>
+          <ul id="boggle-words"></ul>
+        </div>
+        <div class="boggle-score-container">
+          <h2>Puntuación</h2>
+          <p id="boggle-score">0</p>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
