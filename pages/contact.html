@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/contact.css" />
+</head>
+<body>
+    <div class="navigation-bar">
+        <nav class="navbar">
+          <div class="navbar-links">
+            <a href="../index.html">Juego</a>
+            <a href="./rules.html">Instrucciones</a>
+            <a href="#">Contacto</a>
+          </div>
+          <div class="navbar-welcome">
+            <p>Bienvenido, <span id="player-name">Nombre Jugador</span></p>
+          </div>
+        </nav>
+      </div>
+
+      <div class="container">
+        <h2 class="title">Contáctanos</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" id="name" name="name" class="form-input" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="message" class="form-label">Mensaje:</label>
+                <textarea id="message" name="message" class="form-input" required></textarea>
+                <span class="error-message"></span>
+            </div>
+            <button type="submit" class="submitButton">Enviar</button>
+        </form>
+    </div>
+    <script src="../js/contact.js"></script>
+    
+</body>
+</html>
