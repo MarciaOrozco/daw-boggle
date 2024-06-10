@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener("DOMContentLoaded", function () {
   var board = document.getElementById("boggle-board");
   var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
