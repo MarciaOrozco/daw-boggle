@@ -129,3 +129,11 @@ td {
   margin: 0;
   color: #27ae60;
 }
+
+.letter-button {
+  cursor: pointer;
+}
+
+.letter-button-selected {
+  background-color: #44f3b0;
+}
