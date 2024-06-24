@@ -2,6 +2,7 @@
 
 ## Estructura del proyecto
 
+```
 ├── css/
 │   ├── base.css          # Estilos globales (tipografía, colores, etc.)
 │   ├── contact.css       # Estilos específicos para contact.html
@@ -19,3 +20,4 @@
 ├── index.html            # Página principal
 ├── README.md            
 └── .gitignore            
+```

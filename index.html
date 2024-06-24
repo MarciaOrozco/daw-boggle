@@ -1,59 +1,139 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/normalize.css" />
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/index.css" />
-    <title>Boggle</title>
-  </head>
-  <body>
-    <div class="navigation-bar">
-      <nav class="navbar">
-        <div class="navbar-links">
-          <a href="#">Juego</a>
-          <a href="./pages/rules.html">Instrucciones</a>
-          <a href="./pages/contact.html">Contacto</a>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/normalize.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/index.css" />
+  <title>Boggle</title>
+</head>
+
+<body>
+  <div class="navigation-bar">
+    <nav class="navbar">
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="navbar-links">
+        <a href="#">Juego</a>
+        <a href="./pages/rules.html">Instrucciones</a>
+        <a href="./pages/contact.html">Contacto</a>
+      </div>
+      <div class="navbar-welcome">
+        <p>Bienvenido, <span id="player-name"></span></p>
+      </div>
+    </nav>
+  </div>
+
+  <div class="boogle-container">
+    <div class="boogle-container-left">
+      <div class="card">
+        <div class="card-header">
+          <span span class="svg-span"><img src="./svg/cup.svg" alt="Icono de copa"></span>
+          <h2 class="card-title">Puntajes</h2>
         </div>
-        <div class="navbar-welcome">
-          <p>Bienvenido, <span id="player-name">Nombre Jugador</span></p>
+
+        <div class="list-container scorers-list" id="scorers-list"></div>
+
+        <div class="no-content-message no-scorers-message">
+          <p>Aún no hay puntajes registradas</p>
+          <span class="emoji">📊</span>
         </div>
-      </nav>
+      </div>
+      <div class="card config-card">
+        <div class="card-header">
+          <span class="svg-span">
+            <img src="./svg/settings.svg" alt="Icono de configuracion">
+          </span>
+          <h2 class="card-title">Ajustes</h2>
+        </div>
+
+        <div>
+          <label class="setting-label">Tiempo (Segundos):</label>
+          <div class="options" id="time-option">
+            <div class="radio-option">
+              <input type="radio" id="time60" name="time" value="60">
+              <label for="time60">60</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="time120" name="time" value="120">
+              <label for="time120">120</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="time180" name="time" value="180">
+              <label for="time180">180</label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="setting-label">Sonido:</label>
+
+          <div class="options" id="sound-setting">
+            <div class="radio-option">
+              <input type="radio" id="sound-on" name="sound" value="true">
+              <label for="sound-on">Activado</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="sound-off" name="sound" value="false">
+              <label for="sound-off">Desactivado</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <div class="header-container">
-      <div class="title-container">
-        <h1>Boggle</h1>
-        <p>Encuentra tantas palabras como puedas en el tablero</p>
-      </div>
-      <div class="right-container">
-        <div class="score-container">
-          <h2>Score</h2>
-          <p id="boggle-score">0</p>
+
+    <div class="boogle-container-center">
+      <div class="card">
+        <div class="card-header">
+          <input class="styled-input" readonly type="text" id="boggle-add-word" />
         </div>
-        <div class="timer-container">
-          <h2>Tiempo</h2>
-          <p id="boggle-timer">0:00</p>
+        <div id="boggle"></div>
+        <div class="game-info-container">
+          <div class="game-info score">
+            <span id="game-info-value" class="svg-span"><img src="./svg/ribbon.svg" alt="Icono de medalla"> <span id="game-score">0</span></span>
+          </div>
+          <div class="game-info time">
+            <span id="game-info-value" class="svg-span"><img src="./svg/clock.svg" alt="Icono de reloj"> <span
+                id="timer-value">02:00</span>
+            </span>
+          </div>
+        </div>
+
+        <button class="button validate-button" id="validate-button">Validar</button>
+
+        <div class="input-name-container">
+          <input type="text" id="input-player-name" placeholder="Nombre del jugador">
+        </div>
+
+        <div class="action-buttons-container">
+          <button id="stop-game-btn" class="button stop-game-button">
+            <img class="svg-button" src="./svg/check.svg" alt="Icono de listo">
+            </svg>Terminar</button>
+          <button id="start-game-btn" class="button start-game-button">
+            <img class="svg-button" src="./svg/reload.svg" alt="Icono de recargar">
+            Nuevo juego</button>
         </div>
       </div>
     </div>
-    <div class="game-container">
-      <div class="left-container">
-        <div class="boggle-container">
-          <table id="boggle-board"></table>
+
+    <div class="boogle-container-right">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon">P</div>
+          <h2 class="card-title">Palabras</h2>
         </div>
-        <div class="boggle-add-word-container">
-          <input type="text" id="boggle-add-word" />
-          <button id="boggle-add-word-button">Validar</button>
-        </div>
-      </div>
-      <div class="right-container">
-        <div class="boggle-words-container">
-          <h2>Palabras</h2>
-          <ul id="boggle-words"></ul>
+        <div class="list-container words-list"></div>
+        <div class="no-content-message no-words-message">
+          <p>Aún no hay palabras registradas</p>
+          <span class="emoji">📝</span>
         </div>
       </div>
     </div>
-    <script src="js/index.js"></script>
-  </body>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+
 </html>
