@@ -117,26 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeBoardState();
 
     /**
-    * SECCION DE INGRESO NOMBRE DE USUARIO 
-    * 
-    */
-    var playerName = localStorage.getItem('playerName') || 'Jugador';
-    var playerNameSpan = document.querySelector('#player-name');
-    var playerNameInput = document.querySelector('#input-player-name');
-
-    playerNameInput.value = playerName;
-    playerNameSpan.textContent = playerName;
-
-    function handleInputPlayerNameChange() {
-        var playerName = playerNameInput.value;
-        localStorage.setItem('playerName', playerName);
-        playerNameSpan.textContent = playerName;
-    }
-
-    playerNameInput.addEventListener('blur', handleInputPlayerNameChange);
-    playerNameInput.addEventListener('change', handleInputPlayerNameChange);
-
-    /**
     * SECCION DE TEMPORIZADOR 
     * 
     */
@@ -239,26 +219,105 @@ document.addEventListener("DOMContentLoaded", function () {
         listaContainer.style.display = 'block';
     }
 
-    function saveGameLetter() {
+    async function saveGameLetter() {
         if (isGameStarted) {
             var noWordMessageContainer = document.querySelector('.no-words-message');
             var listaContainer = document.querySelector('.list-container.words-list');
             var wordInput = document.getElementById('boggle-add-word');
+            var word = wordInput.value;
 
-            noWordMessageContainer.style.display = 'none';
-
-            var listItem = document.createElement('div');
-            listItem.className = 'list-item';
-            listItem.textContent = wordInput.value;
-
-            listaContainer.style.display = 'block';
-            listaContainer.appendChild(listItem);
+            noWordMessageContainer.style.display = 'none';           
+            if (word) {
+                var isValid = await validateWord(word);
+                if (isValid) {
+                  var listItem = document.createElement("div");
+                  listItem.className = "list-item";
+                  listItem.textContent = word;
+        
+                  listaContainer.style.display = "block";
+                  listaContainer.appendChild(listItem);
+        
+                  // incrementar puntos
+              
+                  clearBoardSelection();
+        
+                  wordInput.value = "";
+                  selectedWord = "";
+                  selectedIndexes = [];
+                  updateUI();
+                } else {
+                  // agregar mensaje de error
+                  // descontar puntos
+                  clearBoardSelection();
+                }
+              }
         }
     }
+
+    async function validateWord(word) {
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+        return response.ok;
+      }
+    
+      function clearBoardSelection() {
+        var letters = document.querySelectorAll(".letter-button");
+        letters.forEach((letter) => {
+          letter.classList.remove("letter-button-selected");
+          letter.classList.remove("letter-button-last-selected");
+          letter.classList.remove("disabled");
+        });
+        selectedWord = "";
+        selectedIndexes = [];
+        updateUI();
+      }
 
     startGameButton.addEventListener('click', startNewGame);
     stopGameButton.addEventListener('click', stopGameAndSendData);
     validateButton.addEventListener('click', saveGameLetter);
+
+    
+    /**
+    * SECCION DE INGRESO NOMBRE DE USUARIO 
+    * 
+    */
+    var playerName = localStorage.getItem('playerName') || 'Jugador';
+    var playerNameSpan = document.querySelector('#player-name');
+    var playerNameInput = document.querySelector('#input-player-name');
+    var nameError = document.querySelector('#name-error');
+
+    playerNameInput.value = playerName;
+    playerNameSpan.textContent = playerName;
+
+    function handleInputPlayerNameChange() {
+        var playerName = playerNameInput.value; 
+        
+        if (playerName.length == 0) {
+            nameError.textContent = "Debes completar con tu nombre para comenzar la partida."; 
+            nameError.style.display = "block";
+            startGameButton.classList.add("button-disabled");
+            return;
+        }
+        
+        if (playerName.length < 3) {
+            nameError.textContent = "El nombre debe tener al menos 3 caracteres."; 
+            nameError.style.display = "block";
+            startGameButton.classList.add("button-disabled");
+            return;
+        }
+
+        startGameButton.classList.remove("button-disabled");
+        nameError.style.display = "none";
+        localStorage.setItem('playerName', playerName);
+        playerNameSpan.textContent = playerName;
+
+        //detectar que esta escribiendo 
+    }
+
+    playerNameInput.addEventListener('blur', handleInputPlayerNameChange);
+    playerNameInput.addEventListener('change', handleInputPlayerNameChange);
+    playerNameInput.addEventListener('keydown', handleInputPlayerNameChange);
 
     /**
     * SECCION DE SELECCIONAR CONFIGURACION DEL JUEGO

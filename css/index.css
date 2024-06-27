@@ -82,6 +82,14 @@
   border-color: #f472b6;
 }
 
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  padding-top: 10px;
+  text-align: center;
+  display: none;
+}
+
 /* Estilos de botones */
 .button {
   margin-top: 15px;
