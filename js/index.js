@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var answerInput = document.querySelector("#boggle-add-word");
     var selectedWord = "";
     var selectedIndexes = [];
+    var validateButton = document.getElementById('validate-button');
 
     function createBoard() {
         var board = document.createElement('div');
@@ -103,7 +104,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function initializeBoardState() {
+        var buttons = document.querySelectorAll(".letter-button");
+        buttons.forEach((button) => {
+          button.classList.add("button-disabled");
+        });
+        validateButton.disabled = true;
+        validateButton.classList.add("button-disabled");
+      }
+
     createBoard();
+    initializeBoardState();
 
     /**
     * SECCION DE INGRESO NOMBRE DE USUARIO 
@@ -174,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
     */
     var startGameButton = document.getElementById('start-game-btn');
     var stopGameButton = document.getElementById('stop-game-btn');
-    var validateButton = document.getElementById('validate-button');
     var isGameStarted = false;
 
     function startNewGame() {
@@ -183,12 +193,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         isGameStarted = true;
         stopGameButton.style.visibility = 'visible';
+        validateButton.disabled = false;
+        validateButton.classList.remove("button-disabled");
+
+        var buttons = document.querySelectorAll(".letter-button");
+        buttons.forEach((button) => {
+        button.classList.remove("button-disabled");
+        });
         startTimer();
     }
 
     function stopGame() {
         stopGameButton.style.visibility = 'hidden';
         isGameStarted = false;
+        initializeBoardState();
         stopTimer();
     }
 

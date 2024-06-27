@@ -116,6 +116,11 @@
   gap: 8px;
 }
 
+.button-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 /* Estilos de entrada */
 .styled-input {
   border: none;
