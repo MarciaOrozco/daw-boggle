@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     /**
     * SECCION DE TABLERO 
     * 
@@ -14,9 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var BOARD_SIZE = 16;
     var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var boggleContainer = document.querySelector('#boggle');
-    var answerInput = document.querySelector("#boggle-add-word");
-    var selectedWord = "";
+    var answerInput = document.querySelector('#boggle-add-word');
+    var selectedWord = '';
     var selectedIndexes = [];
+    var validateButton = document.getElementById('validate-button');
+    var wordListContainer = document.querySelector('.list-container.words-list');
+    var gameScoreElement = document.getElementById('game-score');
+    var wordInput = document.getElementById('boggle-add-word');
 
     function createBoard() {
         var board = document.createElement('div');
@@ -37,9 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var letter = event.target;
         var index = Array.prototype.indexOf.call(letter.parentNode.children, letter);
 
-        if (letter.classList.contains("disabled")) return;
+        if (letter.classList.contains('disabled')) return;
 
-        if (letter.classList.contains("letter-button-selected")) {
+        if (letter.classList.contains('letter-button-selected')) {
             if (index === selectedIndexes[selectedIndexes.length - 1]) {
                 deselectLetter(letter, index);
             }
@@ -53,13 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function selectLetter(letter, index) {
         selectedWord += letter.textContent;
         selectedIndexes.push(index);
-        letter.classList.add("letter-button-selected");
+        letter.classList.add('letter-button-selected');
     }
 
     function deselectLetter(letter) {
         selectedWord = selectedWord.slice(0, -1);
         selectedIndexes.pop();
-        letter.classList.remove("letter-button-selected");
+        letter.classList.remove('letter-button-selected');
     }
 
     function updateUI() {
@@ -71,11 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateLastSelectedLetter() {
         var buttons = document.querySelectorAll('.letter-button');
         for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("letter-button-last-selected");
+            buttons[i].classList.remove('letter-button-last-selected');
         }
         if (selectedIndexes.length > 0) {
             var lastSelectedIndex = selectedIndexes[selectedIndexes.length - 1];
-            document.querySelectorAll('.letter-button')[lastSelectedIndex].classList.add("letter-button-last-selected");
+            document.querySelectorAll('.letter-button')[lastSelectedIndex].classList.add('letter-button-last-selected');
         }
     }
 
@@ -83,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var letters = document.querySelectorAll('.letter-button');
         if (selectedIndexes.length === 0) {
             for (var i = 0; i < letters.length; i++) {
-                letters[i].classList.remove("disabled");
+                letters[i].classList.remove('disabled');
             }
             return;
         }
@@ -99,31 +103,28 @@ document.addEventListener("DOMContentLoaded", function () {
             var isAdjacent = Math.abs(buttonRow - row) <= 1 && Math.abs(buttonCol - col) <= 1;
             var isSelected = selectedIndexes.indexOf(i) !== -1;
 
-            letters[i].classList.toggle("disabled", !isAdjacent && !isSelected);
+            letters[i].classList.toggle('disabled', !isAdjacent && !isSelected);
         }
     }
 
+    function initializeBoardState() {
+        var buttons = document.querySelectorAll('.letter-button');
+        buttons.forEach((button) => {
+          button.classList.add('button-disabled');
+          button.classList.remove('letter-button-selected');
+          button.classList.remove('letter-button-last-selected');
+        });
+        validateButton.disabled = true;
+        validateButton.classList.add('button-disabled');
+        wordInput.value = '';
+        selectedWord = '';
+        selectedIndexes = [];
+        wordListContainer.innerHTML = '';
+        gameScoreElement.textContent = 0;
+      }
+
     createBoard();
-
-    /**
-    * SECCION DE INGRESO NOMBRE DE USUARIO 
-    * 
-    */
-    var playerName = localStorage.getItem('playerName') || 'Jugador';
-    var playerNameSpan = document.querySelector('#player-name');
-    var playerNameInput = document.querySelector('#input-player-name');
-
-    playerNameInput.value = playerName;
-    playerNameSpan.textContent = playerName;
-
-    function handleInputPlayerNameChange() {
-        var playerName = playerNameInput.value;
-        localStorage.setItem('playerName', playerName);
-        playerNameSpan.textContent = playerName;
-    }
-
-    playerNameInput.addEventListener('blur', handleInputPlayerNameChange);
-    playerNameInput.addEventListener('change', handleInputPlayerNameChange);
+    initializeBoardState();
 
     /**
     * SECCION DE TEMPORIZADOR 
@@ -137,15 +138,15 @@ document.addEventListener("DOMContentLoaded", function () {
         var minutes = Math.floor(timeLeft / 60);
         var seconds = timeLeft % 60;
         var formattedTime =
-            (minutes < 10 ? "0" : "") + minutes + ":" +
-            (seconds < 10 ? "0" : "") + seconds;
-
+            (minutes < 10 ? '0' : '') + minutes + ':' +
+            (seconds < 10 ? '0' : '') + seconds;
+    
         document.querySelector('#timer-value').textContent = formattedTime;
-
+    
         if (timeLeft === 0) {
             stopTimer();
             isGameStarted = false;
-            saveGameScorage();
+            stopGameAndSendData();
         } else {
             timeLeft--;
         }
@@ -169,12 +170,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /**
+    * MODAL
+    * 
+    */
+
+    var modal = document.getElementById('error-modal');
+    var span = document.getElementsByClassName('close')[0];
+    var modalMessage = document.getElementById('modal-message');
+
+
+    function showErrorModal(message) {
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+    }
+}
+
+    /**
     * SECCION DE EMPEZAR/DETENER EL JUEGO
     * 
     */
     var startGameButton = document.getElementById('start-game-btn');
     var stopGameButton = document.getElementById('stop-game-btn');
-    var validateButton = document.getElementById('validate-button');
     var isGameStarted = false;
 
     function startNewGame() {
@@ -183,22 +208,35 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         isGameStarted = true;
         stopGameButton.style.visibility = 'visible';
+        validateButton.disabled = false;
+        validateButton.classList.remove('button-disabled');
+        startGameButton.classList.add('button-disabled');
+        var buttons = document.querySelectorAll('.letter-button');
+        buttons.forEach((button) => {
+        button.classList.remove('button-disabled');
+        });
         startTimer();
     }
 
     function stopGame() {
         stopGameButton.style.visibility = 'hidden';
         isGameStarted = false;
+        initializeBoardState();
         stopTimer();
     }
 
-    function stopGameAndSendData() {
-        stopGame();
-        saveGameScore();
+    function clearBoard() {
+        var board = document.querySelector('.board');
+        if (board) {
+            board.remove();
+        }
     }
 
     function saveGameScore() {
         var puntuacion = document.getElementById('game-score').textContent;
+        if (puntuacion < 0) {
+            puntuacion = 0;
+        }
         var listaContainer = document.querySelector('.list-container.scorers-list');
         var noScorerMessageContainer = document.querySelector('.no-scorers-message');
 
@@ -221,26 +259,147 @@ document.addEventListener("DOMContentLoaded", function () {
         listaContainer.style.display = 'block';
     }
 
-    function saveGameLetter() {
+    function stopGameAndSendData() {
+        showErrorModal('Se termino el tiempo!');
+        stopGameButton.style.visibility = 'hidden';
+        isGameStarted = false;
+        startGameButton.classList.remove('button-disabled');
+        saveGameScore();
+        clearBoard();
+        createBoard();
+        initializeBoardState();
+        stopTimer();
+    }
+
+    function calculatePoints(wordLength) {
+        if (wordLength === 3 || wordLength === 4) {
+            return 3;
+        } else if (wordLength === 5) {
+            return 4;
+        } else if (wordLength === 6) {
+            return 5;
+        } else if (wordLength === 7) {
+            return 6;
+        } else if (wordLength >= 8) {
+            return 11;
+        }
+        return 0;
+    }
+
+    async function saveGameLetter() {
         if (isGameStarted) {
             var noWordMessageContainer = document.querySelector('.no-words-message');
             var listaContainer = document.querySelector('.list-container.words-list');
-            var wordInput = document.getElementById('boggle-add-word');
+            var word = wordInput.value;
 
-            noWordMessageContainer.style.display = 'none';
+            if (word.length < 3) {
+                showErrorModal('No se aceptan palabras con menos de tres letras');
+                clearBoardSelection();
+                return;
+            }
 
-            var listItem = document.createElement('div');
-            listItem.className = 'list-item';
-            listItem.textContent = wordInput.value;
+            var existingWords = Array.from(listaContainer.querySelectorAll('.list-item')).map(item => item.textContent);
+            if (existingWords.includes(word)) {
+                showErrorModal('Esta palabra ya fue encontrada');
+                clearBoardSelection();
+                return;
+            }
 
-            listaContainer.style.display = 'block';
-            listaContainer.appendChild(listItem);
+            if (word) {
+                var isValid = await validateWord(word);
+                if (isValid) {
+                    noWordMessageContainer.style.display = 'none';  
+                var listItem = document.createElement('div');
+                listItem.className = 'list-item';
+                listItem.textContent = word;
+        
+                listaContainer.style.display = 'block';
+                listaContainer.appendChild(listItem);
+                
+                var currentScore = parseInt(gameScoreElement.textContent, 10);
+
+                var points = calculatePoints(word.length);
+                gameScoreElement.textContent = currentScore + points;
+          
+                clearBoardSelection();
+    
+                wordInput.value = '';
+                selectedWord = '';
+                selectedIndexes = [];
+                updateUI();
+                } else {
+                    var currentScore = parseInt(gameScoreElement.textContent, 10);
+                    gameScoreElement.textContent = currentScore - 1;
+                    clearBoardSelection();
+                }
+              } 
         }
     }
+
+    async function validateWord(word) {
+        const response = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+        return response.ok;
+      }
+    
+      function clearBoardSelection() {
+        var letters = document.querySelectorAll('.letter-button');
+        letters.forEach((letter) => {
+          letter.classList.remove('letter-button-selected');
+          letter.classList.remove('letter-button-last-selected');
+          letter.classList.remove('disabled');
+        });
+        selectedWord = '';
+        selectedIndexes = [];
+        updateUI();
+      }
 
     startGameButton.addEventListener('click', startNewGame);
     stopGameButton.addEventListener('click', stopGameAndSendData);
     validateButton.addEventListener('click', saveGameLetter);
+
+    
+    /**
+    * SECCION DE INGRESO NOMBRE DE USUARIO 
+    * 
+    */
+    var playerName = localStorage.getItem('playerName') || 'Jugador';
+    var playerNameSpan = document.querySelector('#player-name');
+    var playerNameInput = document.querySelector('#input-player-name');
+    var nameError = document.querySelector('#name-error');
+
+    playerNameInput.value = playerName;
+    playerNameSpan.textContent = playerName;
+
+    function handleInputPlayerNameChange() {
+        var playerName = playerNameInput.value; 
+        
+        if (playerName.length == 0) {
+            nameError.textContent = 'Debes completar con tu nombre para comenzar la partida.'; 
+            nameError.style.display = 'block';
+            startGameButton.classList.add('button-disabled');
+            return;
+        }
+        
+        if (playerName.length < 3) {
+            nameError.textContent = 'El nombre debe tener al menos 3 caracteres.'; 
+            nameError.style.display = 'block';
+            startGameButton.classList.add('button-disabled');
+            return;
+        }
+
+        startGameButton.classList.remove('button-disabled');
+        nameError.style.display = 'none';
+        localStorage.setItem('playerName', playerName);
+        playerNameSpan.textContent = playerName;
+
+        //detectar que esta escribiendo 
+    }
+
+    playerNameInput.addEventListener('blur', handleInputPlayerNameChange);
+    playerNameInput.addEventListener('change', handleInputPlayerNameChange);
+    playerNameInput.addEventListener('keydown', handleInputPlayerNameChange);
 
     /**
     * SECCION DE SELECCIONAR CONFIGURACION DEL JUEGO
