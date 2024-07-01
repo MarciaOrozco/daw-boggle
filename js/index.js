@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function stopGameAndSendData() {
+        showErrorModal('Se termino el tiempo!');
         stopGameButton.style.visibility = 'hidden';
         isGameStarted = false;
         startGameButton.classList.remove('button-disabled');
