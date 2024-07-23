@@ -23,8 +23,9 @@
 │   ├── menu.svg
 │   ├── reload.svg    
 │   ├── ribbon.svg    
-│   ├── settings.svg   
-│   ├── stats.svg   
+│   ├── settings.svg
+│   ├── stats.svg
+│   ├── user.svg
 │   └── write.svg  
 ├── sounds/
 │   ├── alarm.mp3         # Sonido de alarma
