@@ -83,7 +83,7 @@
 }
 
 .error-message {
-  color: red;
+  color: #ff7675;
   font-size: 0.9em;
   padding-top: 10px;
   text-align: center;
@@ -216,15 +216,11 @@
 }
 
 /* Estilos de listas */
-.list-container {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
 
 .list-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   color: #4a4a4a;
@@ -245,8 +241,36 @@
   display: none;
 }
 
-.top-score {
+.player-name {
+  width: 80px;
+  overflow: hidden; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player-date {
+  font-weight: 100;
+  font-size: 12px;
+}
+
+.player-score {
   color: #4CAF50;
+}
+
+.point-span {
+  color: #4a90e2;
+}
+
+.feedback-message-container {
+  margin: 20px;
+  padding: 5px;
+  color: #000;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+  color: white;
+  padding: 15px 32px;
+  visibility: hidden;
 }
 
 /* Estilos de mensajes */
@@ -269,7 +293,7 @@
   margin-bottom: 10px;
 }
 
-.no-content-message .emoji {
+.no-content-message {
   font-size: 40px;
   margin-top: 10px;
 }
