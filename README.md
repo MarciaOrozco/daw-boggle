@@ -16,6 +16,18 @@
 ├── pages/
 │   ├── contact.html      # Página de contacto
 │   └── rules.html        # Página de reglas 
+├── svg/
+│   ├── check.svg
+│   ├── clock.svg
+│   ├── cup.svg
+│   ├── menu.svg
+│   ├── reload.svg    
+│   ├── ribbon.svg    
+│   ├── settings.svg   
+│   ├── stats.svg   
+│   └── write.svg  
+├── sounds/
+│   ├── alarm.mp3         # Sonido de alarma
 ├── /
 ├── index.html            # Página principal
 ├── README.md            
