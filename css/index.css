@@ -165,8 +165,12 @@
 }
 
 .input-name-container::after {
-  content: '👤';
-  font-size: 20px;
+  content: '';
+  background-image: url('../svg/user.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 30px; 
+  height: 30px; 
   pointer-events: none;
   position: absolute;
   right: 15px;
