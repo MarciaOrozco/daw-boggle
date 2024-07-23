@@ -1,36 +1,36 @@
 /* Estilos generales */
 .boogle-container {
+  align-items: center;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   padding: 0 20px;
 }
 
 /* Estilos de la tarjeta */
 .card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #e0e0e0;
-  overflow: hidden;
-  padding: 24px;
   background-color: #ffffff;
-  min-width: 150px;
-  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
   box-shadow: 0 4px 6px #0000001a, 0 1px 3px #00000014;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  overflow: hidden;
+  padding: 24px;
+  transition: all 0.3s ease;
   width: 300px;
 }
 
 .card-header {
-  display: flex;
   align-items: center;
+  display: flex;
   margin-bottom: 15px;
 }
 
 .card-title {
-  margin: 0;
   color: #1f2937;
   font-size: 24px;
+  margin: 0;
 }
 
 .config-card {
@@ -42,28 +42,28 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 350px;
   margin: 0 auto;
+  max-width: 350px;
   padding-bottom: 20px;
   text-decoration: none;
   user-select: none;
 }
 
 .letter-button {
-  width: 60px;
-  height: 60px;
+  align-items: center;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
+  cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 24px;
   font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  padding: 5px;
+  height: 60px;
+  justify-content: center;
   margin-bottom: 10px;
+  padding: 5px;
+  transition: background-color 0.3s;
+  width: 60px;
 }
 
 .letter-button:hover {
@@ -72,35 +72,35 @@
 
 .letter-button-selected {
   background-color: #6ee7b7;
-  color: white;
   border-color: #6ee7b7;
+  color: white;
 }
 
 .letter-button-last-selected {
   background-color: #f472b6;
-  color: white;
   border-color: #f472b6;
+  color: white;
 }
 
 .error-message {
   color: #ff7675;
+  display: none;
   font-size: 0.9em;
   padding-top: 10px;
   text-align: center;
-  display: none;
 }
 
 /* Estilos de botones */
 .button {
-  margin-top: 15px;
-  color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  color: white;
+  cursor: pointer;
   font-size: 14px;
   font-weight: bold;
+  margin-top: 15px;
+  padding: 10px 20px;
   text-align: center;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
@@ -113,46 +113,46 @@
 }
 
 .stop-game-button {
-  visibility: hidden;
   background-color: #ff7675;
+  visibility: hidden;
 }
 
 .action-buttons-container {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 8px;
+  justify-content: space-between;
 }
 
 .button-disabled {
-  pointer-events: none;
   opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Estilos de entrada */
 .styled-input {
   border: none;
-  outline: none;
   font-size: 25px;
+  outline: none;
   padding-bottom: 20px;
   text-align: center;
   width: 100%;
 }
 
 .input-name-container {
-  position: relative;
   margin-top: 25px;
+  position: relative;
 }
 
 .input-name-container input {
-  width: 100%;
-  padding: 12px 15px;
-  font-size: 16px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  outline: none;
-  transition: all 0.3s ease;
   box-sizing: border-box;
+  font-size: 16px;
+  outline: none;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .input-name-container input:focus {
@@ -166,20 +166,20 @@
 
 .input-name-container::after {
   content: '👤';
+  font-size: 20px;
+  pointer-events: none;
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 20px;
-  pointer-events: none;
 }
 
 /* Estilos de información del juego */
 .game-info-container {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 8px;
+  justify-content: space-between;
 }
 
 .game-info {
@@ -193,9 +193,9 @@
 /* Estilos de iconos y SVG */
 .svg-span img,
 .svg-button {
-  width: 24px;
   height: 24px;
   vertical-align: middle;
+  width: 24px;
 }
 
 .svg-span img {
@@ -203,27 +203,26 @@
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
-  background-color: #4a90e2;
-  color: #ffffff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background-color: #4a90e2;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
   font-weight: bold;
+  height: 32px;
+  justify-content: center;
+  margin-right: 10px;
+  width: 32px;
 }
 
 /* Estilos de listas */
-
 .list-item {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   color: #4a4a4a;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
   transition: background-color 0.2s ease, padding-left 0.2s ease;
 }
 
@@ -242,15 +241,15 @@
 }
 
 .player-name {
-  width: 80px;
   overflow: hidden; 
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80px;
 }
 
 .player-date {
-  font-weight: 100;
   font-size: 12px;
+  font-weight: 100;
 }
 
 .player-score {
@@ -262,34 +261,32 @@
 }
 
 .feedback-message-container {
-  margin: 20px;
-  padding: 5px;
-  color: #000;
-  text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
   color: white;
+  margin: 20px;
   padding: 15px 32px;
+  text-align: center;
   visibility: hidden;
 }
 
 /* Estilos de mensajes */
 .no-content-message {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  animation: fadeIn 0.5s ease-out;
   background-color: #f8f9fa;
   border-radius: 8px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 15px;
-  animation: fadeIn 0.5s ease-out;
+  padding: 20px;
+  text-align: center;
 }
 
 .no-content-message p {
-  font-size: 16px;
   color: #6c757d;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
@@ -319,17 +316,16 @@
 }
 
 .radio-option label {
-  display: block;
-  padding: 10px;
-  text-align: center;
   background-color: #f0f0f0;
-  color: #555;
   border-radius: 8px;
+  color: #555;
   cursor: pointer;
-  transition: all 0.2s ease;
+  display: block;
   font-size: 14px;
   font-weight: 500;
-  border: none;
+  padding: 10px;
+  text-align: center;
+  transition: all 0.2s ease;
 }
 
 .radio-option input[type="radio"]:checked + label {
@@ -339,53 +335,53 @@
 
 /* Estilos del Modal */
 .modal {
+  background-color: #00000080;
   display: none;
-  position: fixed;
-  z-index: 1;
+  height: 100%;
   left: 0;
+  overflow: auto;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: #00000080;
+  z-index: 1;
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
   border: 1px solid #888;
-  max-width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px #0000001a;
+  margin: 15% auto;
+  max-width: 400px;
+  padding: 20px;
   text-align: center;
 }
 
 .close {
   color: #aaa;
+  cursor: pointer;
   float: right;
   font-size: 28px;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
   color: #000;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 #modal-message {
-  font-size: 16px;
   color: #333;
+  font-size: 16px;
 }
 
 /* Media query para tablets */
 @media (max-width: 1168px) {
   .boogle-container {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     gap: 30px;
   }
 
@@ -396,8 +392,8 @@
   }
 
   .button {
-    width: 100%;
     margin-top: 10px;
+    width: 100%;
   }
 
   .styled-input {
@@ -409,8 +405,8 @@
   }
 
   .action-buttons-container {
-    display: block;
     align-items: center;
+    display: block;
     gap: 8px;
   }
 }
