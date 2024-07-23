@@ -11,9 +11,13 @@
 </head>
 
 <body>
+  <audio id="alertSound" src="./sounds/alarm.mp3" preload="auto"></audio>
+
   <div class="navigation-bar">
     <nav class="navbar">
-      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="menu-icon" id="menu-icon">
+        <img src="./svg/menu.svg" alt="Menu">
+      </div>
       <div class="navbar-links">
         <a href="#">Juego</a>
         <a href="./pages/rules.html">Instrucciones</a>
@@ -33,11 +37,31 @@
           <h2 class="card-title">Puntajes</h2>
         </div>
 
+        <div>
+          <label class="setting-label">Ordenar por:</label>
+
+          <div class="options" id="sort-table-setting">
+            <div class="radio-option">
+              <input type="radio" id="date" name="sorted-table" value="date">
+              <label for="date">Fecha</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="point" name="sorted-table" value="point">
+              <label for="point">Puntaje</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="name" name="sorted-table" value="name">
+              <label for="name">Nombre</label>
+            </div>
+          </div>
+
+        </div>
+
         <div class="list-container scorers-list" id="scorers-list"></div>
 
         <div class="no-content-message no-scorers-message">
           <p>Aún no hay puntajes registradas</p>
-          <span class="emoji">📊</span>
+          <img src="./svg/stats.svg" alt="Stats">
         </div>
       </div>
       <div class="card config-card">
@@ -96,7 +120,7 @@
           </div>
           <div class="game-info time">
             <span id="game-info-value" class="svg-span"><img src="./svg/clock.svg" alt="Icono de reloj"> <span
-                id="timer-value">02:00</span>
+                id="timer-value" class="timer-value">02:00</span>
             </span>
           </div>
         </div>
@@ -117,6 +141,8 @@
             Nuevo juego</button>
         </div>
       </div>
+
+      <div class="feedback-message-container"></div>
     </div>
 
     <div class="boogle-container-right">
@@ -128,7 +154,7 @@
         <div class="list-container words-list"></div>
         <div class="no-content-message no-words-message">
           <p>Aún no hay palabras registradas</p>
-          <span class="emoji">📝</span>
+          <img src="./svg/write.svg" alt="Stats">
         </div>
       </div>
     </div>
