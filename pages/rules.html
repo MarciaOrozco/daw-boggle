@@ -1,35 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instrucciones</title>
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/rules.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../css/normalize.css" />
-  <link rel="stylesheet" href="../css/base.css" />
-</head>
-<link rel="stylesheet" href="../css/rules.css" />
-</head>
+  <body>
+    <div class="navigation-bar">
+      <nav class="navbar">
+        <div class="menu-icon" id="menu-icon">
+          <img src="./../svg/menu.svg" alt="Menu" />
+        </div>
+        <div class="navbar-links">
+          <a href="../index.html">Juego</a>
+          <a href="#">Instrucciones</a>
+          <a href="./contact.html">Contacto</a>
+        </div>
+        <div class="navbar-welcome">
+          <p>Bienvenido, <span id="player-name"></span></p>
+        </div>
+      </nav>
+    </div>
 
-<body>
-  <div class="navigation-bar">
-    <nav class="navbar">
-      <div class="menu-icon" id="menu-icon">
-        <img src="./../svg/menu.svg" alt="Menu">
+    <main>
+      <div class="center-text">
+        <h1>Boggle</h1>
+        <p>
+          Boggle es un juego de palabras en el que intentas encontrar tantas
+          palabras como puedas en una cuadrícula de 16 casillas (4x4) con letras
+          aleatorias, dentro de un tiempo limitado.
+        </p>
+        <h2>Reglas</h2>
+        <p>
+          El juego comienza cuando se ordenan las letras en la cuadrícula y se
+          inicia el temporizador (puede ser de 1, 2 o 3 minutos).
+        </p>
+        <p>Para encontrar palabras, debes seguir estos criterios:</p>
+        <ul class="left-align">
+          <li>Las palabras deben tener al menos tres letras.</li>
+          <li>
+            Cada letra después de la primera debe ser vecina horizontal,
+            vertical o diagonal de la anterior.
+          </li>
+          <li>
+            No puedes usar la misma casilla de letras más de una vez en una
+            palabra.
+          </li>
+          <li>
+            Se permiten diferentes formas de la misma palabra, como singulares,
+            plurales y otras derivaciones. No se aceptan nombres propios,
+            artículos ni pronombres.
+          </li>
+          <li>
+            Se permiten palabras dentro de palabras, como “casa” y “casamiento”.
+          </li>
+        </ul>
+        <p>
+          Debes ir guardando cada palabra que encuentres para generar una
+          puntuación, hasta que se acabe el tiempo.
+        </p>
+        <p>
+          Las palabras ingresadas deben ser reales (deben existir en el
+          diccionario usado por el juego), de lo contrario, habrá una
+          penalización.
+        </p>
+        <h2>Sistema de puntuación</h2>
+        <p>
+          La puntuación se calcula según la longitud de las palabras
+          encontradas:
+        </p>
+        <ul class="left-align">
+          <li>3-4 letras: 3 punto</li>
+          <li>5 letras: 4 puntos</li>
+          <li>6 letras: 5 puntos</li>
+          <li>7 letras: 6 puntos</li>
+          <li>8 o más letras: 11 puntos</li>
+        </ul>
+        <p>Las palabras incorrectas restan 1 punto!</p>
       </div>
-      <div class="navbar-links">
-        <a href="../index.html">Juego</a>
-        <a href="#">Instrucciones</a>
-        <a href="./contact.html">Contacto</a>
-      </div>
-      <div class="navbar-welcome">
-        <p>Bienvenido, <span id="player-name">Nombre Jugador</span></p>
-      </div>
-    </nav>
-  </div>
+    </main>
 
-  <script src="../js/rules.js"></script>
+    <footer>
+      <p>
+        Podes encontrar el código de nuestro juego en este
+        <a href="https://github.com/MarciaOrozco/daw-boggle" target="_blank">link.</a>
+      </p>
+      <p>Ivo Otero - Marcia Orozco</p>
+    </footer>
 
-</body>
-
+    <script src="../js/rules.js"></script>
+  </body>
 </html>
