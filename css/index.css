@@ -76,10 +76,18 @@
   color: white;
 }
 
+.letter-button-selected:hover {
+  color: #6ee7b7;
+}
+
 .letter-button-last-selected {
   background-color: #f472b6;
   border-color: #f472b6;
   color: white;
+}
+
+.letter-button-last-selected:hover {
+  color: #f472b6;
 }
 
 .error-message {

@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var letters = document.querySelectorAll('.letter-button');
         var lastIndex = selectedIndexes[selectedIndexes.length - 1];
     
-        if (!lastIndex) {
+        if (lastIndex === undefined) {
             letters.forEach(letter => letter.classList.remove('disabled'));
             return;
         }
